@@ -1,0 +1,59 @@
+body { 
+    margin: 0; 
+    overflow: hidden; 
+    background-color: #a7d9e4; /* Fond bleu clair initial */
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+
+#canvas-container { 
+    width: 100%; 
+    height: 100vh; 
+    display: block; 
+}
+
+/* Styles pour la fiche cadeau */
+#gift-card {
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%);
+    background: white; 
+    padding: 20px; 
+    border-radius: 10px; 
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    display: none; /* Cachée par défaut */
+    z-index: 10;
+    max-width: 300px;
+    text-align: center;
+    pointer-events: none; /* Permet de cliquer à travers quand elle est cachée */
+    opacity: 0; /* Pour l'animation d'apparition */
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+#gift-card.visible { 
+    display: block; 
+    pointer-events: auto; /* Active les clics quand elle est visible */
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+#gift-card h2 {
+    color: #1a1a2e;
+    margin-top: 0;
+}
+
+#gift-card button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 15px;
+    font-size: 1em;
+}
+
+#gift-card button:hover {
+    background-color: #45a049;
+}

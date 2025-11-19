@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ma Wishlist de Noël</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+                "gsap": "https://unpkg.com/gsap@3.12.5/index.js"
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <div id="canvas-container"></div>
+    
+    <div id="gift-card">
+        <h2 id="gift-title">Nom du Cadeau</h2>
+        <p>Description du cadeau...</p>
+        <button onclick="closeGiftCard()">Fermer</button>
+    </div>
+
+    <script type="module" src="script.js"></script>
+</body>
+</html>
