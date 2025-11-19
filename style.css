@@ -1,59 +1,176 @@
 body { 
     margin: 0; 
     overflow: hidden; 
-    background-color: #a7d9e4; /* Fond bleu clair initial */
-    font-family: Arial, sans-serif;
-    color: #333;
+    font-family: 'Inter', 'Arial', sans-serif; 
+    background: linear-gradient(to bottom, #020111 0%, #0a0a2e 100%);
 }
 
-#canvas-container { 
-    width: 100%; 
-    height: 100vh; 
-    display: block; 
+#canvas-container { width: 100%; height: 100vh; display: block; }
+
+#instruction {
+    position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.6); padding: 10px 25px; border-radius: 30px;
+    color: rgba(255, 255, 255, 0.9); font-size: 0.9em; text-transform: uppercase;
+    letter-spacing: 2px; pointer-events: none; border: 1px solid rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(5px); opacity: 1; transition: opacity 0.5s; z-index: 10;
+    animation: pulseInstr 3s infinite;
 }
 
-/* Styles pour la fiche cadeau */
+@keyframes pulseInstr {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.1); }
+    50% { box-shadow: 0 0 15px 0 rgba(255, 255, 255, 0.2); }
+}
+
+#star-tooltip {
+    position: absolute; width: 100px; height: 70px;
+    background-color: white; background-size: cover; background-position: center;
+    border-radius: 8px; border: 2px solid #f9f5db;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.5); pointer-events: none; opacity: 0;
+    transform: translate(-50%, -120%) scale(0.8); transition: opacity 0.2s, transform 0.2s;
+    z-index: 50; display: none;
+}
+
+#star-tooltip.active { opacity: 1; display: block; transform: translate(-50%, -130%) scale(1); }
+
+/* --- CARTE CADEAU LIQUID GLASS --- */
 #gift-card {
-    position: absolute; 
-    top: 50%; 
-    left: 50%; 
-    transform: translate(-50%, -50%);
-    background: white; 
-    padding: 20px; 
-    border-radius: 10px; 
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    display: none; /* Cachée par défaut */
-    z-index: 10;
-    max-width: 300px;
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%) scale(0.8) translateY(20px);
+    width: 340px;
+    border-radius: 30px;
+    
+    /* L'effet Liquid Glass */
+    background: rgba(20, 20, 35, 0.4); /* Fond sombre très transparent */
+    backdrop-filter: blur(40px) saturate(180%); /* Flou intense + saturation des couleurs derrière */
+    -webkit-backdrop-filter: blur(40px) saturate(180%);
+    
+    /* Bordures lumineuses pour l'effet verre */
+    border-top: 1px solid rgba(255, 255, 255, 0.4);
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    
+    box-shadow: 
+        0 25px 50px -12px rgba(0, 0, 0, 0.7), /* Ombre portée profonde */
+        inset 0 0 20px rgba(255, 255, 255, 0.05); /* Lueur interne */
+        
     text-align: center;
-    pointer-events: none; /* Permet de cliquer à travers quand elle est cachée */
-    opacity: 0; /* Pour l'animation d'apparition */
-    transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-#gift-card.visible { 
-    display: block; 
-    pointer-events: auto; /* Active les clics quand elle est visible */
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-}
-
-#gift-card h2 {
-    color: #1a1a2e;
-    margin-top: 0;
-}
-
-#gift-card button {
-    background-color: #4CAF50;
     color: white;
-    padding: 8px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 15px;
-    font-size: 1em;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 100;
 }
 
-#gift-card button:hover {
-    background-color: #45a049;
+#gift-card.visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translate(-50%, -50%) scale(1) translateY(0);
+}
+
+/* Image avec effet de fusion */
+.card-image-placeholder {
+    width: 100%;
+    height: 180px;
+    background-color: #222;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    /* Masque pour fondre l'image dans le verre */
+    mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+}
+
+.card-content {
+    padding: 0 30px 30px 30px;
+    position: relative;
+    margin-top: -20px; /* Remonte le contenu sur le dégradé de l'image */
+}
+
+#gift-title {
+    margin: 0 0 5px 0;
+    font-size: 1.8em;
+    font-weight: 800;
+    background: linear-gradient(135deg, #fff 0%, #ccc 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+#gift-desc {
+    font-size: 0.95em;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 20px;
+    line-height: 1.5;
+    font-weight: 300;
+}
+
+#gift-price {
+    display: inline-block;
+    font-size: 1.2em;
+    color: #1a1a2e;
+    background: #ffd700;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    margin-bottom: 25px;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+}
+
+/* Placeholder Lien (Bouton Liquid) */
+#gift-link {
+    display: block;
+    width: 100%;
+    padding: 14px 0;
+    
+    /* Dégradé brillant */
+    background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+    border: 1px solid rgba(255,255,255,0.2);
+    backdrop-filter: blur(10px);
+    
+    color: #fff;
+    border-radius: 16px;
+    text-decoration: none;
+    font-weight: 600;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Effet de survol sur le lien */
+#gift-link:hover {
+    background: linear-gradient(135deg, #ffd700 0%, #ffab00 100%);
+    color: #000;
+    border-color: transparent;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+    transform: translateY(-2px);
+}
+
+/* Petit texte discret pour le lien fictif */
+.link-placeholder-text {
+    font-size: 0.8em;
+    opacity: 0.5;
+    margin-bottom: 5px;
+    display: block;
+    text-align: left;
+    padding-left: 5px;
+}
+
+#close-btn {
+    background: transparent;
+    border: none;
+    color: rgba(255,255,255,0.4);
+    padding: 10px;
+    cursor: pointer;
+    font-size: 0.85em;
+    transition: color 0.3s;
+}
+#close-btn:hover {
+    color: white;
+    text-decoration: underline;
 }
