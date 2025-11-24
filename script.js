@@ -610,7 +610,7 @@ function generateClickableStars() {
     
     const generatedPositions = [];
 
-    for(let i=0; i<12; i++) {
+    for(let i=0; i<13; i++) {
         const sprite = new THREE.Sprite(mat.clone());
         
         let valid = false;
@@ -620,9 +620,9 @@ function generateClickableStars() {
 
         // Boucle anti-collision
         while(!valid && attempts < 50) {
-            rX = (Math.random() - 0.5) * 20; 
-            rY = 4.5 + Math.random() * 6.5; 
-            rZ = -5 + (Math.random() * 4); 
+            rX = (Math.random() - 0.5) * 12; 
+            rY = 5.0 + Math.random() * 5.0; 
+            rZ = -5 + (Math.random() * 4);
             pos.set(rX, rY, rZ);
             
             valid = true;
