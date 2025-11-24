@@ -379,6 +379,14 @@ const giftsData = [
         price: "110€", 
         link: "https://www.zalando.fr/new-balance-480-unisex-baskets-basses-navy-ne215p072-k11.html", 
         img: "https://img01.ztat.net/article/spp-media-p1/122abee8e30b4a9eb591626145f22334/84f614f4c94f42209c6d22fd321cecb8.jpg?imwidth=1800" 
+    },
+    // Cadeau 13
+    { 
+        title: "Extension DLC - Pokemon ", 
+        desc: "Demander a max pour l'acheter", 
+        price: "23.99€", 
+        link: "https://www.instant-gaming.com/en/20593-buy-pokemon-legends-z-a-mega-dimension-switch-nintendo-eshop/", 
+        img: "https://static.actugaming.net/media/2025/09/Pokemon-Legends-Z-A%E2%80%93Mega-Dimension_Main-key-art.jpg" 
     }
 ];
 
